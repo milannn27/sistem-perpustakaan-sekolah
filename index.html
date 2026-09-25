@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Perpustakaan Sekolah</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📚 Sistem Perpustakaan Sekolah</h1>
+
+    <form method="POST">
+
+        <input type="text" name="judul" placeholder="Judul Buku" required>
+
+        <input type="text" name="penulis" placeholder="Penulis" required>
+
+        <input type="text" name="kategori" placeholder="Kategori" required>
+
+        <select name="status">
+            <option>Tersedia</option>
+            <option>Dipinjam</option>
+        </select>
+
+        <button type="submit">Tambah Buku</button>
+
+    </form>
+
+    <table>
+
+        <tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Penulis</th>
+            <th>Kategori</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+
+        {% for data in buku %}
+        <tr>
+
+            <td>{{ loop.index }}</td>
+
+            <td>{{ data.judul }}</td>
+
+            <td>{{ data.penulis }}</td>
+
+            <td>{{ data.kategori }}</td>
+
+            <td>{{ data.status }}</td>
+
+            <td>
+                <a href="/hapus/{{ loop.index0 }}">Hapus</a>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - Perpustakaan</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Perpustakaan
+    </div>
+
+    <div class="nav-menu">
+
+        <a href="/admin">
+            Dashboard
+        </a>
+
+        <a href="/admin/buku">
+            Data Buku
+        </a>
+
+        <a href="/admin/peminjaman">
+            Peminjaman
+        </a>
+
+        <a href="/logout" class="logout">
+            Keluar
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<div class="dashboard">
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <div>
+
+            <p class="small-title">
+                ADMINISTRATOR
+            </p>
+
+            <h1>
+                Selamat Datang, Admin 👋
+            </h1>
+
+            <p>
+                Kelola perpustakaan dan peminjaman buku.
+            </p>
+
+        </div>
+
+
+        <div class="welcome-icon">
+            📚
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= STATISTIK ================= -->
+
+    <div class="cards">
+
+
+        <!-- TOTAL BUKU -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                📚
+            </div>
+
+            <div class="card-content">
+
+                <p>
+                    Total Buku
+                </p>
+
+                <h2>
+                    {{ total }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BUKU TERSEDIA -->
+
+        <div class="card green">
+
+            <div class="card-icon">
+                ✅
+            </div>
+
+            <div class="card-content">
+
+                <p>
+                    Buku Tersedia
+                </p>
+
+                <h2>
+                    {{ tersedia }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DIPINJAM -->
+
+        <div class="card orange">
+
+            <div class="card-icon">
+                📖
+            </div>
+
+            <div class="card-content">
+
+                <p>
+                    Sedang Dipinjam
+                </p>
+
+                <h2>
+                    {{ dipinjam }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TOTAL PEMINJAMAN -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                📝
+            </div>
+
+            <div class="card-content">
+
+                <p>
+                    Total Peminjaman
+                </p>
+
+                <h2>
+                    {{ total_peminjaman }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= MENU ADMIN ================= -->
+
+    <div class="menu-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    ADMIN PANEL
+                </p>
+
+                <h2>
+                    Menu Admin
+                </h2>
+
+                <p class="section-description">
+                    Pilih menu yang ingin kamu kelola.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="menu-grid">
+
+
+            <!-- KELOLA BUKU -->
+
+            <a href="/admin/buku"
+               class="menu-card">
+
+                <div class="menu-card-icon">
+                    📚
+                </div>
+
+                <div class="menu-card-content">
+
+                    <h3>
+                        Kelola Buku
+                    </h3>
+
+                    <p>
+                        Tambah, edit dan hapus data buku
+                        perpustakaan.
+                    </p>
+
+                </div>
+
+                <div class="menu-arrow">
+                    →
+                </div>
+
+            </a>
+
+
+
+            <!-- PEMINJAMAN -->
+
+            <a href="/admin/peminjaman"
+               class="menu-card">
+
+                <div class="menu-card-icon">
+                    📋
+                </div>
+
+                <div class="menu-card-content">
+
+                    <h3>
+                        Data Peminjaman
+                    </h3>
+
+                    <p>
+                        Lihat data siswa, buku,
+                        tanggal pinjam dan pengembalian.
+                    </p>
+
+                </div>
+
+                <div class="menu-arrow">
+                    →
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026 Sistem Perpustakaan Sekolah
+
+</footer>
+
+
+
+</body>
+
+</html>
+```
