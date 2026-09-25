@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Perpustakaan Sekolah</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="login-page">
+
+
+<div class="login-box">
+
+
+    <div class="login-icon">
+        📚
+    </div>
+
+
+    <h1>
+        Perpustakaan
+    </h1>
+
+
+    <p class="login-subtitle">
+        Sistem Perpustakaan Sekolah
+    </p>
+
+
+    {% if error %}
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <!-- =================================================
+         LOGIN ADMIN
+         ================================================= -->
+
+    <div id="formAdmin">
+
+
+        <h2>
+            🔐 Login Admin
+        </h2>
+
+
+        <form method="POST">
+
+
+            <input
+                type="hidden"
+                name="role"
+                value="admin"
+            >
+
+
+            <label>
+                Username
+            </label>
+
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Masukkan username admin"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Masukkan password admin"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="btn-login">
+
+                Masuk sebagai Admin
+
+            </button>
+
+
+        </form>
+
+
+        <button
+            type="button"
+            class="btn-secondary"
+            onclick="tampilkanSiswa()">
+
+            👨‍🎓 Login sebagai Siswa
+
+        </button>
+
+
+    </div>
+
+
+    <!-- =================================================
+         LOGIN SISWA
+         ================================================= -->
+
+    <div
+        id="formSiswa"
+        style="display: none;">
+
+
+        <h2>
+            👨‍🎓 Data Diri Siswa
+        </h2>
+
+
+        <p>
+            Silakan isi data diri kamu untuk
+            menggunakan perpustakaan.
+        </p>
+
+
+        <form method="POST">
+
+
+            <input
+                type="hidden"
+                name="role"
+                value="siswa"
+            >
+
+
+            <label>
+                Nama Lengkap
+            </label>
+
+
+            <input
+                type="text"
+                name="nama"
+                placeholder="Contoh: Andi Saputra"
+                required
+            >
+
+
+            <label>
+                Kelas
+            </label>
+
+
+            <input
+                type="text"
+                name="kelas"
+                placeholder="Contoh: XI RPL 1"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="btn-login">
+
+                Masuk sebagai Siswa
+
+            </button>
+
+
+        </form>
+
+
+        <button
+            type="button"
+            class="btn-secondary"
+            onclick="tampilkanAdmin()">
+
+            🔐 Kembali ke Login Admin
+
+        </button>
+
+
+    </div>
+
+
+    <div class="login-info">
+
+        <p>
+            <strong>
+                Sistem Perpustakaan Sekolah
+            </strong>
+        </p>
+
+        <p>
+            Siswa cukup mengisi nama lengkap
+            dan kelas.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+function tampilkanSiswa() {
+
+    document.getElementById("formAdmin").style.display = "none";
+
+    document.getElementById("formSiswa").style.display = "block";
+
+}
+
+
+function tampilkanAdmin() {
+
+    document.getElementById("formSiswa").style.display = "none";
+
+    document.getElementById("formAdmin").style.display = "block";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Peminjaman Saya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Perpustakaan
+    </div>
+
+    <div class="nav-menu">
+
+        <a href="/siswa">
+            Daftar Buku
+        </a>
+
+        <a href="/siswa/peminjaman">
+            Peminjaman Saya
+        </a>
+
+        <a href="/logout" class="logout">
+            Keluar
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="content">
+
+
+    <div class="page-header">
+
+        <div>
+
+            <p class="small-title">
+                SISWA
+            </p>
+
+            <h1>
+                Peminjaman Saya
+            </h1>
+
+            <p>
+                Daftar buku yang sedang kamu pinjam.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="table-card">
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            No
+                        </th>
+
+                        <th>
+                            Buku
+                        </th>
+
+                        <th>
+                            Tanggal Pinjam
+                        </th>
+
+                        <th>
+                            Batas Pengembalian
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for data in peminjaman %}
+
+                    <tr>
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+                        <td class="book-title">
+                            {{ data.judul_buku }}
+                        </td>
+
+                        <td>
+                            {{ data.tanggal_peminjaman }}
+                        </td>
+
+                        <td>
+                            {{ data.batas_pengembalian }}
+                        </td>
+
+                        <td>
+
+                            {% if data.terlambat %}
+
+                            <span class="status borrowed">
+                                ⚠ Terlambat
+                            </span>
+
+                            {% elif data.status == "Dipinjam" %}
+
+                            <span class="status available">
+                                ● Sedang Dipinjam
+                            </span>
+
+                            {% else %}
+
+                            <span class="status available">
+                                ✓ Dikembalikan
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="empty">
+
+                            📚 Kamu belum mempunyai peminjaman.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<footer>
+    © 2026 Sistem Perpustakaan Sekolah
+</footer>
+
+
+</body>
+</html>
