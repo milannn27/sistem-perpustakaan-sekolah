@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Pesan Buku - Perpustakaan</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Perpustakaan
+    </div>
+
+    <div class="nav-menu">
+
+        <a href="/siswa">
+            Daftar Buku
+        </a>
+
+        <a href="/siswa/peminjaman">
+            Peminjaman Saya
+        </a>
+
+        <a href="/logout" class="logout">
+            Keluar
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="content">
+
+
+    <div class="page-header">
+
+        <div>
+
+            <p class="small-title">
+                PEMINJAMAN BUKU
+            </p>
+
+            <h1>
+                Pesan Buku
+            </h1>
+
+            <p>
+                Tentukan tanggal kamu akan mengambil buku.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% if error %}
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <div class="form-card">
+
+
+        <h2>
+            📖 {{ buku.judul }}
+        </h2>
+
+
+        <p>
+            <strong>Penulis:</strong>
+            {{ buku.penulis }}
+        </p>
+
+
+        <p>
+            <strong>Kategori:</strong>
+            {{ buku.kategori }}
+        </p>
+
+
+        <br>
+
+
+        {% if not error %}
+
+        <form method="POST">
+
+
+            <label>
+                Tanggal Peminjaman
+            </label>
+
+
+            <input
+                type="date"
+                name="tanggal_peminjaman"
+                min="{{ none }}"
+                required
+            >
+
+
+            <p style="margin-top: 10px;">
+                📌 Masa peminjaman maksimal
+                <strong>3 hari</strong>.
+            </p>
+
+
+            <p>
+                Setelah melakukan PO, silakan
+                mengambil buku langsung di perpustakaan.
+            </p>
+
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                📖 Konfirmasi Pinjam
+
+            </button>
+
+
+            <a
+                href="/siswa"
+                class="btn-secondary">
+
+                ← Kembali
+
+            </a>
+
+
+        </form>
+
+        {% else %}
+
+        <a
+            href="/siswa"
+            class="btn-secondary">
+
+            ← Kembali ke Daftar Buku
+
+        </a>
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+<footer>
+    © 2026 Sistem Perpustakaan Sekolah
+</footer>
+
+
+</body>
+</html>

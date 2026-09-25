@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Buku - Admin</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Perpustakaan
+    </div>
+
+    <div class="nav-menu">
+
+        <a href="/admin">
+            Dashboard
+        </a>
+
+        <a href="/admin/buku">
+            Kelola Data Buku
+        </a>
+
+        <a href="/admin/koleksi">
+            Koleksi Buku
+        </a>
+
+        <a href="/admin/peminjaman">
+            Peminjaman
+        </a>
+
+        <a href="/logout"
+           class="logout">
+            Keluar
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="content">
+
+    <div class="welcome">
+
+        <div>
+
+            <p class="small-title">
+                ADMINISTRATOR
+            </p>
+
+            <h1>
+                Edit Data Buku
+            </h1>
+
+            <p>
+                Ubah informasi buku perpustakaan.
+            </p>
+
+        </div>
+
+        <div class="welcome-icon">
+            ✏️
+        </div>
+
+    </div>
+
+
+    <div class="table-card">
+
+        <div class="table-title">
+
+            <div>
+
+                <h2>
+                    ✏️ Edit Buku
+                </h2>
+
+                <p>
+                    Perbarui data buku di bawah ini.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="POST">
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Judul Buku
+                    </label>
+
+                    <input
+                        type="text"
+                        name="judul"
+                        value="{{ buku.judul }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Penulis
+                    </label>
+
+                    <input
+                        type="text"
+                        name="penulis"
+                        value="{{ buku.penulis }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Kategori
+                    </label>
+
+                    <select
+                        name="kategori"
+                        required
+                    >
+
+                        <option
+                            value="Fiksi"
+                            {% if buku.kategori == "Fiksi" %}
+                            selected
+                            {% endif %}
+                        >
+                            Fiksi
+                        </option>
+
+                        <option
+                            value="Non-Fiksi"
+                            {% if buku.kategori == "Non-Fiksi" %}
+                            selected
+                            {% endif %}
+                        >
+                            Non-Fiksi
+                        </option>
+
+                        <option
+                            value="Buku Pelajaran"
+                            {% if buku.kategori == "Buku Pelajaran" %}
+                            selected
+                            {% endif %}
+                        >
+                            Buku Pelajaran
+                        </option>
+
+                        <option
+                            value="Referensi"
+                            {% if buku.kategori == "Referensi" %}
+                            selected
+                            {% endif %}
+                        >
+                            Referensi
+                        </option>
+
+                        <option
+                            value="Komik"
+                            {% if buku.kategori == "Komik" %}
+                            selected
+                            {% endif %}
+                        >
+                            Komik
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Jumlah / Stok
+                    </label>
+
+                    <input
+                        type="number"
+                        name="stok"
+                        min="0"
+                        value="{{ buku.stok }}"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-login"
+            >
+                💾 Simpan Perubahan
+            </button>
+
+            <br><br>
+
+            <a
+                href="/admin/buku"
+                class="btn-secondary"
+            >
+                ← Kembali
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 Sistem Perpustakaan Sekolah
+</footer>
+
+</body>
+
+</html>

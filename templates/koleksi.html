@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Koleksi Buku - Admin</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Perpustakaan
+    </div>
+
+    <div class="nav-menu">
+
+        <a href="/admin">
+            Dashboard
+        </a>
+
+        <a href="/admin/buku">
+            Kelola Data Buku
+        </a>
+
+        <a href="/admin/koleksi">
+            Koleksi Buku
+        </a>
+
+        <a href="/admin/peminjaman">
+            Peminjaman
+        </a>
+
+        <a href="/logout"
+           class="logout">
+            Keluar
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="content">
+
+
+    <!-- HEADER -->
+
+    <div class="welcome">
+
+        <div>
+
+            <p class="small-title">
+                PERPUSTAKAAN
+            </p>
+
+            <h1>
+                Koleksi Buku
+            </h1>
+
+            <p>
+                Daftar seluruh koleksi buku
+                perpustakaan sekolah.
+            </p>
+
+        </div>
+
+        <div class="welcome-icon">
+            📖
+        </div>
+
+    </div>
+
+
+    <!-- KOLEKSI -->
+
+    <div class="table-card">
+
+        <div class="table-title">
+
+            <div>
+
+                <h2>
+                    📚 Koleksi Buku
+                </h2>
+
+                <p>
+                    Daftar buku dan jumlah stok
+                    yang tersedia.
+                </p>
+
+            </div>
+
+            <span>
+                {{ buku|length }} Judul
+            </span>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            No
+                        </th>
+
+                        <th>
+                            Judul Buku
+                        </th>
+
+                        <th>
+                            Penulis
+                        </th>
+
+                        <th>
+                            Kategori
+                        </th>
+
+                        <th>
+                            Jumlah / Stok
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for data in buku %}
+
+                    <tr>
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+                        <td class="book-title">
+                            {{ data.judul }}
+                        </td>
+
+                        <td>
+                            {{ data.penulis }}
+                        </td>
+
+                        <td>
+
+                            <span class="category">
+                                {{ data.kategori }}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                {{ data.stok }}
+                            </strong>
+                            buku
+
+                        </td>
+
+                        <td>
+
+                            {% if data.stok > 0 %}
+
+                            <span class="status available">
+                                ● Tersedia
+                            </span>
+
+                            {% else %}
+
+                            <span class="status borrowed">
+                                ● Tidak Tersedia
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty"
+                        >
+                            📚 Belum ada koleksi buku.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- KETERANGAN -->
+
+    <div class="table-card">
+
+        <h2>
+            ℹ️ Keterangan
+        </h2>
+
+        <br>
+
+        <p>
+            <span class="status available">
+                ● Tersedia
+            </span>
+            Buku masih memiliki stok.
+        </p>
+
+        <br>
+
+        <p>
+            <span class="status borrowed">
+                ● Tidak Tersedia
+            </span>
+            Seluruh stok buku sedang dipinjam.
+        </p>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 Sistem Perpustakaan Sekolah
+</footer>
+
+
+</body>
+
+</html>

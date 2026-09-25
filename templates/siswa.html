@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Daftar Buku - Siswa</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Perpustakaan
+    </div>
+
+    <div class="nav-menu">
+
+        <a href="/siswa">
+            Daftar Buku
+        </a>
+
+        <a href="/siswa/peminjaman">
+            Peminjaman Saya
+        </a>
+
+        <a href="/logout"
+           class="logout">
+            Keluar
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="content">
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <div>
+
+            <p class="small-title">
+                SISWA
+            </p>
+
+            <h1>
+                Halo, {{ nama }} 👋
+            </h1>
+
+            <p>
+                Kelas:
+                <strong>{{ kelas }}</strong>
+            </p>
+
+            <p>
+                Cari buku berdasarkan kategori
+                yang kamu inginkan.
+            </p>
+
+        </div>
+
+        <div class="welcome-icon">
+            📚
+        </div>
+
+    </div>
+
+
+    <!-- PERINGATAN TERLAMBAT -->
+
+    {% if terlambat %}
+
+    <div class="error">
+
+        ⚠️ <strong>Peringatan!</strong>
+
+        <br><br>
+
+        Kamu memiliki buku yang sudah melewati
+        batas peminjaman 3 hari.
+
+        <br>
+
+        Silakan kembalikan buku terlebih dahulu
+        sebelum meminjam buku lain.
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- =================================================
+         PENCARIAN KATEGORI
+    ================================================== -->
+
+    <div class="table-card">
+
+        <div class="table-title">
+
+            <div>
+
+                <h2>
+                    🔎 Cari Berdasarkan Kategori
+                </h2>
+
+                <p>
+                    Pilih kategori untuk menampilkan
+                    buku yang sesuai.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="GET"
+              action="/siswa">
+
+            <div class="form-group">
+
+                <label>
+                    Kategori Buku
+                </label>
+
+                <select
+                    name="kategori"
+                    onchange="this.form.submit()"
+                >
+
+                    <option
+                        value="Semua"
+                        {% if kategori_dipilih == "Semua" %}
+                        selected
+                        {% endif %}
+                    >
+                        📚 Semua Kategori
+                    </option>
+
+                    <option
+                        value="Fiksi"
+                        {% if kategori_dipilih == "Fiksi" %}
+                        selected
+                        {% endif %}
+                    >
+                        📖 Fiksi
+                    </option>
+
+                    <option
+                        value="Non-Fiksi"
+                        {% if kategori_dipilih == "Non-Fiksi" %}
+                        selected
+                        {% endif %}
+                    >
+                        📘 Non-Fiksi
+                    </option>
+
+                    <option
+                        value="Buku Pelajaran"
+                        {% if kategori_dipilih == "Buku Pelajaran" %}
+                        selected
+                        {% endif %}
+                    >
+                        📕 Buku Pelajaran
+                    </option>
+
+                    <option
+                        value="Referensi"
+                        {% if kategori_dipilih == "Referensi" %}
+                        selected
+                        {% endif %}
+                    >
+                        📗 Referensi
+                    </option>
+
+                    <option
+                        value="Komik"
+                        {% if kategori_dipilih == "Komik" %}
+                        selected
+                        {% endif %}
+                    >
+                        📙 Komik
+                    </option>
+
+                </select>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- =================================================
+         DAFTAR BUKU
+    ================================================== -->
+
+    <div class="table-card">
+
+        <div class="table-title">
+
+            <div>
+
+                <h2>
+                    📚 Daftar Buku
+                </h2>
+
+                <p>
+                    {% if kategori_dipilih == "Semua" %}
+
+                    Menampilkan semua kategori buku.
+
+                    {% else %}
+
+                    Menampilkan kategori:
+                    <strong>
+                        {{ kategori_dipilih }}
+                    </strong>
+
+                    {% endif %}
+                </p>
+
+            </div>
+
+            <span>
+                {{ buku|length }} Judul
+            </span>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            No
+                        </th>
+
+                        <th>
+                            Judul Buku
+                        </th>
+
+                        <th>
+                            Penulis
+                        </th>
+
+                        <th>
+                            Kategori
+                        </th>
+
+                        <th>
+                            Stok
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Aksi
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for data in buku %}
+
+                    <tr>
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+                        <td class="book-title">
+                            {{ data.judul }}
+                        </td>
+
+                        <td>
+                            {{ data.penulis }}
+                        </td>
+
+                        <td>
+
+                            <span class="category">
+                                {{ data.kategori }}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                {{ data.stok }}
+                            </strong>
+
+                        </td>
+
+                        <td>
+
+                            {% if data.stok > 0 %}
+
+                            <span class="status available">
+                                ● Tersedia
+                            </span>
+
+                            {% else %}
+
+                            <span class="status borrowed">
+                                ● Tidak Tersedia
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if data.stok > 0 %}
+
+                                {% if not terlambat %}
+
+                                <a
+                                    href="/siswa/pesan/{{ data.id }}"
+                                    class="edit"
+                                >
+                                    📖 Pinjam
+                                </a>
+
+                                {% else %}
+
+                                <span class="status borrowed">
+                                    Tidak bisa meminjam
+                                </span>
+
+                                {% endif %}
+
+                            {% else %}
+
+                            <span>
+                                Stok habis
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="empty"
+                        >
+
+                            📚 Tidak ada buku dalam
+                            kategori ini.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 Sistem Perpustakaan Sekolah
+</footer>
+
+
+</body>
+
+</html>

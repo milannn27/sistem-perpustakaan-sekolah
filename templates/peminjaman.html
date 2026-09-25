@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Peminjaman - Admin</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">📚 Perpustakaan</div>
+
+    <div class="nav-menu">
+        <a href="/admin">Dashboard</a>
+        <a href="/admin/buku">Kelola Buku</a>
+        <a href="/admin/peminjaman">Peminjaman</a>
+        <a href="/logout" class="logout">Keluar</a>
+    </div>
+</nav>
+
+<div class="content">
+
+    <div class="welcome">
+        <div>
+            <p class="small-title">ADMIN</p>
+            <h1>Data Peminjaman 📋</h1>
+            <p>
+                Kelola data peminjaman buku siswa dan konfirmasi
+                pengembalian buku.
+            </p>
+        </div>
+
+        <div class="welcome-icon">📋</div>
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-title">
+            <div>
+                <h2>📚 Daftar Peminjaman</h2>
+                <p>
+                    Data siswa yang sedang atau sudah meminjam buku.
+                </p>
+            </div>
+
+            <span>{{ peminjaman|length }} Data</span>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Siswa</th>
+                        <th>Kelas</th>
+                        <th>Buku</th>
+                        <th>Tanggal Pinjam</th>
+                        <th>Batas Pengembalian</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for data in peminjaman %}
+
+                    <tr>
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+                        <td>
+                            <strong>{{ data.nama_siswa }}</strong>
+                        </td>
+
+                        <td>
+                            {{ data.kelas }}
+                        </td>
+
+                        <td class="book-title">
+                            {{ data.judul_buku }}
+                        </td>
+
+                        <td>
+                            {{ data.tanggal_peminjaman }}
+                        </td>
+
+                        <td>
+                            {{ data.batas_pengembalian }}
+                        </td>
+
+                        <td>
+
+                            {% if data.status == "Dikembalikan" %}
+
+                                <span class="status available">
+                                    ● Dikembalikan
+                                </span>
+
+                            {% elif data.terlambat %}
+
+                                <span class="status borrowed">
+                                    ● Terlambat
+                                </span>
+
+                            {% else %}
+
+                                <span class="status borrowed">
+                                    ● Dipinjam
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if data.status == "Dipinjam" %}
+
+                                <a
+                                    href="/admin/kembalikan/{{ loop.index0 }}"
+                                    class="edit"
+                                    onclick="return confirm('Apakah buku ini sudah dikembalikan oleh siswa?')"
+                                >
+                                    ↩️ Kembalikan
+                                </a>
+
+                            {% else %}
+
+                                <span class="status available">
+                                    ✓ Selesai
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="8" class="empty">
+                            📚 Belum ada data peminjaman.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Sistem Perpustakaan Sekolah
+</footer>
+
+</body>
+</html>

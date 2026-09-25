@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Kelola Data Buku - Admin</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Perpustakaan
+    </div>
+
+    <div class="nav-menu">
+
+        <a href="/admin">
+            Dashboard
+        </a>
+
+        <a href="/admin/buku">
+            Kelola Data Buku
+        </a>
+
+        <a href="/admin/koleksi">
+            Koleksi Buku
+        </a>
+
+        <a href="/admin/peminjaman">
+            Peminjaman
+        </a>
+
+        <a href="/logout"
+           class="logout">
+            Keluar
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="content">
+
+
+    <!-- HEADER -->
+
+    <div class="welcome">
+
+        <div>
+
+            <p class="small-title">
+                ADMINISTRATOR
+            </p>
+
+            <h1>
+                Kelola Data Buku
+            </h1>
+
+            <p>
+                Tambahkan dan kelola data buku
+                perpustakaan.
+            </p>
+
+        </div>
+
+        <div class="welcome-icon">
+            📚
+        </div>
+
+    </div>
+
+
+    <!-- PESAN ERROR -->
+
+    {% if error %}
+
+    <div class="error">
+        ⚠️ {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <!-- PESAN SUKSES -->
+
+    {% if sukses %}
+
+    <div class="success">
+        ✅ {{ sukses }}
+    </div>
+
+    {% endif %}
+
+
+    <!-- TAMBAH BUKU -->
+
+    <div class="table-card">
+
+        <div class="table-title">
+
+            <div>
+
+                <h2>
+                    ➕ Tambah Buku
+                </h2>
+
+                <p>
+                    Masukkan data buku baru.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="POST"
+              action="/tambah">
+
+            <div class="form-grid">
+
+
+                <!-- JUDUL -->
+
+                <div class="form-group">
+
+                    <label>
+                        Judul Buku
+                    </label>
+
+                    <input
+                        type="text"
+                        name="judul"
+                        placeholder="Masukkan judul buku"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PENULIS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Penulis
+                    </label>
+
+                    <input
+                        type="text"
+                        name="penulis"
+                        placeholder="Masukkan nama penulis"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- KATEGORI -->
+
+                <div class="form-group">
+
+                    <label>
+                        Kategori
+                    </label>
+
+                    <select
+                        name="kategori"
+                        required
+                    >
+
+                        <option value="">
+                            -- Pilih Kategori --
+                        </option>
+
+                        <option value="Fiksi">
+                            Fiksi
+                        </option>
+
+                        <option value="Non-Fiksi">
+                            Non-Fiksi
+                        </option>
+
+                        <option value="Buku Pelajaran">
+                            Buku Pelajaran
+                        </option>
+
+                        <option value="Referensi">
+                            Referensi
+                        </option>
+
+                        <option value="Komik">
+                            Komik
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- STOK -->
+
+                <div class="form-group">
+
+                    <label>
+                        Jumlah / Stok Buku
+                    </label>
+
+                    <input
+                        type="number"
+                        name="stok"
+                        min="1"
+                        placeholder="Contoh: 5"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select
+                        name="status"
+                    >
+
+                        <option value="Tersedia">
+                            Tersedia
+                        </option>
+
+                    </select>
+
+                    <small>
+                        Status otomatis berdasarkan stok.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-login"
+            >
+                ➕ Tambah Buku
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- INFORMASI -->
+
+    <div class="table-card">
+
+        <h2>
+            📖 Informasi
+        </h2>
+
+        <br>
+
+        <p>
+            Setiap judul buku hanya boleh dimasukkan
+            satu kali agar data tidak menumpuk.
+        </p>
+
+        <br>
+
+        <p>
+            Jika memiliki beberapa buku dengan judul
+            yang sama, gunakan bagian
+            <strong>Jumlah / Stok Buku</strong>.
+        </p>
+
+        <br>
+
+        <a
+            href="/admin/koleksi"
+            class="btn-login"
+        >
+            📚 Lihat Koleksi Buku
+        </a>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 Sistem Perpustakaan Sekolah
+</footer>
+
+
+</body>
+
+</html>

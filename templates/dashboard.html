@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Menu Utama - Perpustakaan</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Perpustakaan
+    </div>
+
+    <div class="nav-menu">
+        <a href="/dashboard">Menu Utama</a>
+        <a href="/buku">Data Buku</a>
+        <a href="/logout" class="logout">Keluar</a>
+    </div>
+
+</nav>
+
+
+<div class="dashboard">
+
+    <div class="welcome">
+        <div>
+            <p class="small-title">SELAMAT DATANG</p>
+            <h1>Sistem Perpustakaan Sekolah 📚</h1>
+            <p>
+                Kelola data buku perpustakaan dengan mudah.
+            </p>
+        </div>
+
+        <div class="welcome-icon">
+            📖
+        </div>
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">📚</div>
+            <div>
+                <p>Total Buku</p>
+                <h2>{{ total }}</h2>
+            </div>
+        </div>
+
+        <div class="card green">
+            <div class="card-icon">✅</div>
+            <div>
+                <p>Buku Tersedia</p>
+                <h2>{{ tersedia }}</h2>
+            </div>
+        </div>
+
+        <div class="card orange">
+            <div class="card-icon">📖</div>
+            <div>
+                <p>Sedang Dipinjam</p>
+                <h2>{{ dipinjam }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="menu-section">
+
+        <h2>Menu Utama</h2>
+
+        <div class="menu-grid">
+
+            <a href="/buku" class="menu-card">
+                <div class="menu-card-icon">📚</div>
+                <h3>Data Buku</h3>
+                <p>
+                    Lihat dan kelola daftar buku perpustakaan.
+                </p>
+            </a>
+
+            <a href="/buku" class="menu-card">
+                <div class="menu-card-icon">➕</div>
+                <h3>Tambah Buku</h3>
+                <p>
+                    Tambahkan buku baru ke dalam sistem.
+                </p>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Sistem Perpustakaan Sekolah
+</footer>
+
+</body>
+</html>
